@@ -7,7 +7,7 @@
  *
  * Sorts by increasing value, lowest to highest.
  *
- * @param <T>
+ * @param <T> the type of object to be contained by the collection
  */
 public class JavaSortedPager<T extends Comparable<T>> implements Pageable<T> {
 
@@ -100,5 +100,15 @@ public class JavaSortedPager<T extends Comparable<T>> implements Pageable<T> {
     public T[] page(int i) {
 
         return items;
+    }
+
+    @Override
+    public String toString(){
+        String ret = "JavaSortedPager, " + size() + " objects: ";
+        for (int i = 0; i < size(); i++) {
+            ret += get(i) + ", ";
+        }
+
+        return ret;
     }
 }
