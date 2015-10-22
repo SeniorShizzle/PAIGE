@@ -1,3 +1,7 @@
+import com.sun.javaws.exceptions.CacheAccessException;
+
+import java.util.ArrayList;
+
 /**
  * JavaSortedPager.java
  *
@@ -17,6 +21,12 @@ public class JavaSortedPager<T extends Comparable<T>> implements Pageable<T> {
     /** The maximum number of objects on a single page */
     private int pageSize;
 
+    private boolean verbose = true;
+
+    private boolean shouldCache = false;
+
+    private ArrayList<T[]> cache;
+
 
     /**
      * Instantiates a new JavaSortedPager with the given objects and specified page size.
@@ -33,8 +43,11 @@ public class JavaSortedPager<T extends Comparable<T>> implements Pageable<T> {
         this.items = objects;
         this.pageSize = pageSize;
 
+        if (verbose) System.out.println(this);
+
         java.util.Arrays.sort(this.items); // Use the built in sorting methods to sort this array descending
 
+        if (verbose) System.out.println(this);
 
     }
 
@@ -55,7 +68,7 @@ public class JavaSortedPager<T extends Comparable<T>> implements Pageable<T> {
      * @return the smallest item in the collection
      */
     public T min(){
-        return items[0];
+        return get(0);
     }
 
     /**
@@ -63,7 +76,7 @@ public class JavaSortedPager<T extends Comparable<T>> implements Pageable<T> {
      * @return the largest item in the collection
      */
     public T max(){
-        return items[size() - 1];
+        return get(size() - 1);
     }
 
 
@@ -99,16 +112,46 @@ public class JavaSortedPager<T extends Comparable<T>> implements Pageable<T> {
      */
     public T[] page(int i) {
 
+        T[] gooey;
+
         return items;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         String ret = "JavaSortedPager, " + size() + " objects: ";
         for (int i = 0; i < size(); i++) {
             ret += get(i) + ", ";
         }
 
         return ret;
+    }
+
+    /** Caches the page for quick retrieval
+     *
+     * @param page the generic array to cache
+     * @param pageIndex the index of the page of the data being stored
+     * @throws Exception if illegal caching or on caching error
+     */
+    private void cache(T[] page, int pageIndex) throws Exception{
+        if (!shouldCache) throw new Exception("Caching attempted while not enabled.");
+
+        if (cache == null){
+            cache = new ArrayList<>(pages()); // Creates an ArrayList with capacity for the correct number of pages
+        }
+    }
+
+    /** Sets whether or not the JavaSortedPager should log its output for debugging.
+     * @param verbose TRUE if the JavaSortedPager should log excessively
+     */
+    public void setVerbose(boolean verbose){
+        this.verbose = verbose;
+    }
+
+    /** Sets whether the JavaSortedPager object should cache data when pages are accessed.
+     * @param shouldCache TRUE if the JavaSortedPager object should cache data for quicker re-access
+     */
+    public void setShouldCache(boolean shouldCache){
+        this.shouldCache = shouldCache;
     }
 }
