@@ -105,16 +105,42 @@ public class JavaSortedPager<T extends Comparable<T>> implements Pageable<T> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     /**
      * Returns the data elements contained on the i-th page.
      * This method will always return an array of * up to * pageSize() elements;
      * DO NOT assume this method to return an array of size pageSize()!
      */
     public T[] page(int i) {
+        T[] retArray;
 
-        T[] gooey;
+        if (shouldCache){
+            try {
+                retArray = retrieveCachedPage(i);
+                if (retArray != null ) return retArray;
+            } catch (CacheException e){
+                // The data isn't cached, or there was another error, lets load it fresh
+                // TODO: Something to satisfy the empty catch block??
+            }
+        }
 
-        return items;
+        int pageSize = size() % pageSize() == 0 ? pageSize() : size() % pageSize();
+        retArray = (T[]) new Comparable[pageSize];
+
+        int copyIndex = 0;
+        for (int j = i * pageSize(); j < (i * pageSize()) + pageSize; j++) {
+            retArray[copyIndex] = get(j);
+
+            copyIndex++;
+        }
+
+        try {
+            if (shouldCache) cache(retArray, i);
+        } catch (Exception e){
+            System.out.println(e.getLocalizedMessage());
+        }
+
+        return retArray;
     }
 
     @Override
@@ -133,12 +159,33 @@ public class JavaSortedPager<T extends Comparable<T>> implements Pageable<T> {
      * @param pageIndex the index of the page of the data being stored
      * @throws Exception if illegal caching or on caching error
      */
-    private void cache(T[] page, int pageIndex) throws Exception{
-        if (!shouldCache) throw new Exception("Caching attempted while not enabled.");
+    private void cache(T[] page, int pageIndex) throws CacheException{
+        if (!shouldCache) throw new CacheException("Caching attempted while not enabled.");
+        if (pageIndex < 0 || pageIndex > pages()) throw new IndexOutOfBoundsException("Attempting to set out of cache boundaries.");
+
 
         if (cache == null){
             cache = new ArrayList<>(pages()); // Creates an ArrayList with capacity for the correct number of pages
         }
+
+        cache.set(pageIndex, page);
+    }
+
+    /**
+     * Retrieves the cached data from the cache.
+     * @param pageIndex the index of the page stored in cache
+     * @return the T[] generic array containing items on that page
+     * @throws CacheException if attempted to access data which has not been cached, or out of bounds
+     */
+    private T[] retrieveCachedPage(int pageIndex) throws CacheException{
+        if (!shouldCache) throw new CacheException("Caching attempted while not enabled.");
+        if (pageIndex < 0 || pageIndex > pages()) throw new IndexOutOfBoundsException("Attempting to access out of cache boundaries.");
+
+        T[] retArray = cache.get(pageIndex);
+
+        if (retArray == null || retArray.length == 0) throw new CacheException("Data not cached");
+
+        return cache.get(pageIndex);
     }
 
     /** Sets whether or not the JavaSortedPager should log its output for debugging.

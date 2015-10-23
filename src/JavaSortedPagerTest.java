@@ -49,7 +49,6 @@ public class JavaSortedPagerTest {
         for (int i = 0; i < TEST_SIZE; i++) {
             if (RANDOM) testArray[i] = new TestObject((int)(Math.random()*TEST_SIZE)); // Generates TestObjects in random order
             else testArray[i] = new TestObject(TEST_SIZE - (i + 1)); // Generates TestObjects in reverse order, so they can be sorted
-
         }
 
         pager = new JavaSortedPager<>(testArray, PAGE_SIZE);
@@ -113,7 +112,7 @@ public class JavaSortedPagerTest {
     @Test
     public void testPage() throws Exception {
         for (int section = 0; section < pager.pages(); section++) {
-            TestObject[] page = pager.page(section);
+            Object[] page = pager.page(section); // Generic arrays are returned as Object[]
             assertTrue(page.length <= PAGE_SIZE);
 
             for (int i = 0; i < page.length; i++) {
