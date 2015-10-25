@@ -39,20 +39,28 @@ public class JavaSortedPagerTest {
     public static final int TEST_SIZE = 100;
     public static final int PAGE_SIZE = 45;
     public static final boolean RANDOM = false;
+    public static final boolean testCaching = true;
 
     JavaSortedPager<TestObject> pager;
 
 
     @Before
     public void setUp() throws Exception {
-        TestObject[] testArray = new TestObject[TEST_SIZE];
-        for (int i = 0; i < TEST_SIZE; i++) {
-            if (RANDOM) testArray[i] = new TestObject((int)(Math.random()*TEST_SIZE)); // Generates TestObjects in random order
-            else testArray[i] = new TestObject(TEST_SIZE - (i + 1)); // Generates TestObjects in reverse order, so they can be sorted
-        }
 
-        pager = new JavaSortedPager<>(testArray, PAGE_SIZE);
-        pager.setVerbose(true);
+        if (pager == null) {
+            TestObject[] testArray = new TestObject[TEST_SIZE];
+            for (int i = 0; i < TEST_SIZE; i++) {
+                if (RANDOM)
+                    testArray[i] = new TestObject((int) (Math.random() * TEST_SIZE)); // Generates TestObjects in random order
+                else
+                    testArray[i] = new TestObject(TEST_SIZE - (i + 1)); // Generates TestObjects in reverse order, so they can be sorted
+            }
+
+
+            pager = new JavaSortedPager<>(testArray, PAGE_SIZE);
+            pager.setVerbose(true);
+            pager.setShouldCache(testCaching);
+        }
 
         //System.out.println(pager);
 
@@ -120,6 +128,30 @@ public class JavaSortedPagerTest {
             }
         }
 
+    }
+
+    @Test
+    public void setTestCaching() throws Exception {
+        pager.setShouldCache(true); // if it wasn't set before
+
+
+        for (int section = 0; section < pager.pages(); section++) {
+            Object[] page = pager.page(section); // Generic arrays are returned as Object[]
+            assertTrue(page.length <= PAGE_SIZE);
+
+            for (int i = 0; i < page.length; i++) {
+                assertSame(page[i], pager.get((section * PAGE_SIZE) + i));
+            }
+        }
+
+        for (int section = 0; section < pager.pages(); section++) {
+            Object[] page = pager.page(section); // Generic arrays are returned as Object[]
+            assertTrue(page.length <= PAGE_SIZE);
+
+            for (int i = 0; i < page.length; i++) {
+                assertSame(page[i], pager.get((section * PAGE_SIZE) + i));
+            }
+        }
     }
 
 }

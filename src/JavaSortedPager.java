@@ -1,6 +1,4 @@
-import com.sun.javaws.exceptions.CacheAccessException;
-
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * JavaSortedPager.java
@@ -21,11 +19,14 @@ public class JavaSortedPager<T extends Comparable<T>> implements Pageable<T> {
     /** The maximum number of objects on a single page */
     private int pageSize;
 
+    /** TRUE for extensive pattern logging */
     private boolean verbose = true;
 
-    private boolean shouldCache = false;
+    /** TRUE if the object will cache the results of page requests for performance */
+    private boolean isCaching = false;
 
-    private ArrayList<T[]> cache;
+    /** The HashMap used to store the cached page data */
+    private HashMap<Integer, T[]> cache;
 
 
     /**
@@ -43,11 +44,11 @@ public class JavaSortedPager<T extends Comparable<T>> implements Pageable<T> {
         this.items = objects;
         this.pageSize = pageSize;
 
-        if (verbose) System.out.println(this);
+        if (verbose) System.out.println("Unsorted " + this);
 
-        java.util.Arrays.sort(this.items); // Use the built in sorting methods to sort this array descending
+        sortItemsArray(); // Delegate method, in this class this calls Java.util.Arrays.sort()
 
-        if (verbose) System.out.println(this);
+        if (verbose) System.out.println("Sorted   " + this);
 
     }
 
@@ -110,21 +111,26 @@ public class JavaSortedPager<T extends Comparable<T>> implements Pageable<T> {
      * Returns the data elements contained on the i-th page.
      * This method will always return an array of * up to * pageSize() elements;
      * DO NOT assume this method to return an array of size pageSize()!
+     *
+     * NOTE: This method returns an Object[] not a T[] due to Java Generics Typing
+     *       Method signature is deprecated; call {@code: public Object[] page(int)} instead
+     * @returns an Object[] NOT a T[] !!!!!
      */
     public T[] page(int i) {
         T[] retArray;
 
-        if (shouldCache){
+        if (isCaching){
             try {
                 retArray = retrieveCachedPage(i);
-                if (retArray != null ) return retArray;
+                if (retArray != null ) return retArray; // Short circuit return if cached data is available
             } catch (CacheException e){
                 // The data isn't cached, or there was another error, lets load it fresh
-                // TODO: Something to satisfy the empty catch block??
+                if (verbose) System.out.println(e.getMessage());
             }
         }
 
-        int pageSize = size() % pageSize() == 0 ? pageSize() : size() % pageSize();
+        //int pageSize = pageSize(); // store for efficiency in following ternary
+        int pageSize = i == pages() - 1 ? size() % pageSize() : pageSize();
         retArray = (T[]) new Comparable[pageSize];
 
         int copyIndex = 0;
@@ -135,9 +141,9 @@ public class JavaSortedPager<T extends Comparable<T>> implements Pageable<T> {
         }
 
         try {
-            if (shouldCache) cache(retArray, i);
+            if (isCaching) cache(retArray, i);
         } catch (Exception e){
-            System.out.println(e.getLocalizedMessage());
+            System.out.println(e.getMessage());
         }
 
         return retArray;
@@ -160,15 +166,20 @@ public class JavaSortedPager<T extends Comparable<T>> implements Pageable<T> {
      * @throws Exception if illegal caching or on caching error
      */
     private void cache(T[] page, int pageIndex) throws CacheException{
-        if (!shouldCache) throw new CacheException("Caching attempted while not enabled.");
-        if (pageIndex < 0 || pageIndex > pages()) throw new IndexOutOfBoundsException("Attempting to set out of cache boundaries.");
+        if (!isCaching) throw new CacheException("Caching attempted while not enabled.");
+        if (pageIndex < 0 || pageIndex >= pages()) throw new IndexOutOfBoundsException("Attempting to set out of cache boundaries.");
 
 
         if (cache == null){
-            cache = new ArrayList<>(pages()); // Creates an ArrayList with capacity for the correct number of pages
+            cache = new HashMap<>(); // Creates an ArrayList with capacity for the correct number of pages
         }
 
-        cache.set(pageIndex, page);
+        if (verbose) System.out.println("Caching " + page.length + " objects for page " + pageIndex);
+        if (cache.containsKey(pageIndex)) { // The data should not be able to change after being written
+            System.out.println("Attempting to cache already cached data. Ignoring. ");
+            return;
+        }
+        cache.put(pageIndex, page);
     }
 
     /**
@@ -178,14 +189,17 @@ public class JavaSortedPager<T extends Comparable<T>> implements Pageable<T> {
      * @throws CacheException if attempted to access data which has not been cached, or out of bounds
      */
     private T[] retrieveCachedPage(int pageIndex) throws CacheException{
-        if (!shouldCache) throw new CacheException("Caching attempted while not enabled.");
+        if (!isCaching) throw new CacheException("Caching attempted while not enabled.");
+        if (cache == null) return null; // The cache hasn't been established yet
         if (pageIndex < 0 || pageIndex > pages()) throw new IndexOutOfBoundsException("Attempting to access out of cache boundaries.");
+        if (pageIndex > cache.size() - 1) return null;
 
         T[] retArray = cache.get(pageIndex);
 
         if (retArray == null || retArray.length == 0) throw new CacheException("Data not cached");
 
-        return cache.get(pageIndex);
+        if (verbose) System.out.println("Retrieving Cached Data for Page " + pageIndex);
+        return cache.get(pageIndex); // Retrieves the page or null
     }
 
     /** Sets whether or not the JavaSortedPager should log its output for debugging.
@@ -199,6 +213,17 @@ public class JavaSortedPager<T extends Comparable<T>> implements Pageable<T> {
      * @param shouldCache TRUE if the JavaSortedPager object should cache data for quicker re-access
      */
     public void setShouldCache(boolean shouldCache){
-        this.shouldCache = shouldCache;
+        this.isCaching = shouldCache;
+    }
+
+    /** Returns TRUE if the object is caching page values */
+    public boolean cachingEnabled(){
+        return isCaching;
+    }
+
+    /** The delegate sorting method. Sorts the  */
+    private void sortItemsArray(){
+        java.util.Arrays.sort(this.items); // Use the built in sorting methods to sort this array descending
+
     }
 }
