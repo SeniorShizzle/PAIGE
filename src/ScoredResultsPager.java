@@ -6,15 +6,14 @@ import static java.lang.Thread.sleep; // Not at all related to the algorithm, pu
  * <p>
  * Part of the PAIGE program, Page-Accessed Information Gateway Experiment
  * <p>
- * Uses java.utils.array.sort() to order elements. Makes data available as Pageable.
+ * Uses a custom sorting algorithm to order elements. Makes data available as Pageable.
+ * For best runtime performance, algorithm is optimized for ScoredDocument objects.
  * <p>
- * Sorts by increasing value, lowest to highest.
+ * Sorts by decreasing value, highest to lowest.
  *
- * @param <T> the type of object to be contained by the collection
+ * @param <T> the type of object to be contained by the collection. Optimized for ScoredDocuments.
  */
 public class ScoredResultsPager<T extends Comparable<T>> implements Pageable<T> {
-
-
 
     /**
      * The array of items contained by this object, of type T
@@ -276,7 +275,8 @@ public class ScoredResultsPager<T extends Comparable<T>> implements Pageable<T> 
     }
 
     /**
-     * The delegate sorting method. Sorts the
+     * The delegate sorting method. Sorts the objects in descending order.
+     * This method is optomized for ScoredDocument objects.
      */
     private void sortItemsArray() {
         java.util.Arrays.sort(this.items); // Use the built in sorting methods to sort this array descending

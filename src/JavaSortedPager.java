@@ -221,7 +221,7 @@ public class JavaSortedPager<T extends Comparable<T>> implements Pageable<T> {
         return isCaching;
     }
 
-    /** The delegate sorting method. Sorts the  */
+    /** The delegate sorting method. Sorts the array in ascending order */
     private void sortItemsArray(){
         java.util.Arrays.sort(this.items); // Use the built in sorting methods to sort this array descending
 
