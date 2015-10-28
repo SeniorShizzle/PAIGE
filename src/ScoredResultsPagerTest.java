@@ -41,38 +41,65 @@ public class ScoredResultsPagerTest {
     public static final int PAGE_SIZE = 45;
     public static final boolean RANDOM = false;
     public static final boolean testCaching = true;
+    public static final boolean useScoredDocuments = false;
 
-    JavaSortedPager<TestObject> pager;
+    ScoredResultsPager<TestObject> pager;
+    ScoredResultsPager<ScoredDocument> documentPager;
+
+    Comparable[] testArray;
 
 
     @Before
     public void setUp() throws Exception {
 
         if (pager == null) {
-            TestObject[] testArray = new TestObject[TEST_SIZE];
-            for (int i = 0; i < TEST_SIZE; i++) {
-                if (RANDOM)
-                    testArray[i] = new TestObject((int) (Math.random() * TEST_SIZE)); // Generates TestObjects in random order
-                else
-                    testArray[i] = new TestObject(TEST_SIZE - (i + 1)); // Generates TestObjects in reverse order, so they can be sorted
+            if (useScoredDocuments) {
+                this.testArray = Lab2.generateScoredDocuments(TEST_SIZE);
+                documentPager = new ScoredResultsPager<>((ScoredDocument[])testArray, PAGE_SIZE);
+                documentPager.setVerbose(true);
+                documentPager.setShouldCache(testCaching);
+
+            } else {
+                this.testArray = new TestObject[TEST_SIZE];
+                for (int i = 0; i < TEST_SIZE; i++) {
+                    if (RANDOM)
+                        testArray[i] = new TestObject((int) (Math.random() * TEST_SIZE)); // Generates TestObjects in random order
+                    else
+                        testArray[i] = new TestObject(i); // Generates TestObjects in reverse order, so they can be sorted
+                }
+                pager = new ScoredResultsPager<>((TestObject[])testArray, PAGE_SIZE);
+                pager.setVerbose(true);
+                pager.setShouldCache(testCaching);
+
             }
-
-
-            pager = new JavaSortedPager<>(testArray, PAGE_SIZE);
-            pager.setVerbose(true);
-            pager.setShouldCache(testCaching);
         }
 
-        //System.out.println(pager);
+        java.util.Arrays.sort(testArray); // sort the test array for comparison
+        // Now we have to reverse the array to get it into reverse order
+        for (int i = 0; i < testArray.length / 2; i++) {
+            // swap the elements
+            Comparable temp = testArray[i];
+            testArray[i] = testArray[testArray.length - (i + 1)];
+            testArray[testArray.length - (i + 1)] = temp;
+        }
 
+
+        //System.out.println(pager);
     }
 
 
     @Test
     public void testGet() throws Exception {
-        if (!RANDOM) {
+        if (useScoredDocuments){
             for (int test = 0; test < TEST_SIZE; test += Math.random() * (TEST_SIZE / 50)) { // Test some number of random values
-                assertEquals(test, pager.get(test).value); // The index should be equal to the value stored there, if it's not random
+                assertEquals(testArray[test], documentPager.get(test)); // Compare the sorted input array to the custom sorted object
+            }
+        }
+        else {
+            if (!RANDOM) {
+                for (int test = 0; test < TEST_SIZE; test += Math.random() * (TEST_SIZE / 50)) { // Test some number of random values
+                    assertEquals(TEST_SIZE - (test + 1), pager.get(test).value); // The index should be equal to the value stored there, if it's not random
+                }
             }
         }
 
@@ -81,16 +108,17 @@ public class ScoredResultsPagerTest {
     @Test
     /** Tests whether the collection is sorted properly after instantiation */
     public void testSort() {
+        if (!useScoredDocuments)
         for (int test = 0; test < TEST_SIZE - 1; test += 1) { // Test some number of random values
             // Test whether each value is less than the next value
-            assert (pager.get(test).compareTo(pager.get(test + 1)) < 0); // compareTo should return < 0 if a < b
+            assert (pager.get(test).compareTo(pager.get(test + 1)) > 0); // compareTo should return < 0 if a < b
         }
     }
 
 
     @Test
     public void testMin() throws Exception {
-        if (!RANDOM) {
+        if (!RANDOM && !useScoredDocuments) {
             assertEquals(0, pager.min().value);
         }
 
@@ -98,6 +126,7 @@ public class ScoredResultsPagerTest {
 
     @Test
     public void testMax() throws Exception {
+        if (!useScoredDocuments)
         if (!RANDOM) {
             assertEquals(TEST_SIZE - 1, pager.max().value);
         }
@@ -108,19 +137,34 @@ public class ScoredResultsPagerTest {
     public void testPages() throws Exception {
         double pageCount = (double) TEST_SIZE / (double) PAGE_SIZE; // We should always round up page count
 
-        assertEquals((int) Math.ceil(pageCount), pager.pages());
+        if (useScoredDocuments)
+            assertEquals((int) Math.ceil(pageCount), documentPager.pages());
+
+        if (!useScoredDocuments)
+            assertEquals((int) Math.ceil(pageCount), pager.pages());
+
 
     }
 
     @Test
     public void testPage() throws Exception {
+        if (useScoredDocuments) {
+            for (int section = 0; section < documentPager.pages(); section++) {
+                Object[] page = documentPager.page(section); // Generic arrays are returned as Object[]
+                assertTrue(page.length <= PAGE_SIZE);
 
-        for (int section = 0; section < pager.pages(); section++) {
-            Object[] page = pager.page(section); // Generic arrays are returned as Object[]
-            assertTrue(page.length <= PAGE_SIZE);
+                for (int i = 0; i < page.length; i++) {
+                    assertSame(page[i], documentPager.get((section * PAGE_SIZE) + i));
+                }
+            }
+        } else {
+            for (int section = 0; section < pager.pages(); section++) {
+                Object[] page = pager.page(section); // Generic arrays are returned as Object[]
+                assertTrue(page.length <= PAGE_SIZE);
 
-            for (int i = 0; i < page.length; i++) {
-                assertSame(page[i], pager.get((section * PAGE_SIZE) + i));
+                for (int i = 0; i < page.length; i++) {
+                    assertSame(page[i], pager.get((section * PAGE_SIZE) + i));
+                }
             }
         }
 
@@ -128,26 +172,49 @@ public class ScoredResultsPagerTest {
 
     @Test
     public void setTestCaching() throws Exception {
-        pager.setShouldCache(true); // if it wasn't set before
 
+        if (useScoredDocuments) {
+            documentPager.setShouldCache(true);
 
-        for (int section = 0; section < pager.pages(); section++) {
-            Object[] page = pager.page(section); // Generic arrays are returned as Object[]
-            assertTrue(page.length <= PAGE_SIZE);
+            for (int section = 0; section < documentPager.pages(); section++) {
+                Object[] page = documentPager.page(section); // Generic arrays are returned as Object[]
+                assertTrue(page.length <= PAGE_SIZE);
 
-            for (int i = 0; i < page.length; i++) {
-                assertSame(page[i], pager.get((section * PAGE_SIZE) + i));
+                for (int i = 0; i < page.length; i++) {
+                    assertSame(page[i], documentPager.get((section * PAGE_SIZE) + i));
+                }
+            }
+
+            for (int section = 0; section < documentPager.pages(); section++) {
+                Object[] page = documentPager.page(section); // Generic arrays are returned as Object[]
+                assertTrue(page.length <= PAGE_SIZE);
+
+                for (int i = 0; i < page.length; i++) {
+                    assertSame(page[i], documentPager.get((section * PAGE_SIZE) + i));
+                }
+            }
+        } else {
+            pager.setShouldCache(true); // if it wasn't set before
+
+            for (int section = 0; section < pager.pages(); section++) {
+                Object[] page = pager.page(section); // Generic arrays are returned as Object[]
+                assertTrue(page.length <= PAGE_SIZE);
+
+                for (int i = 0; i < page.length; i++) {
+                    assertSame(page[i], pager.get((section * PAGE_SIZE) + i));
+                }
+            }
+
+            for (int section = 0; section < pager.pages(); section++) {
+                Object[] page = pager.page(section); // Generic arrays are returned as Object[]
+                assertTrue(page.length <= PAGE_SIZE);
+
+                for (int i = 0; i < page.length; i++) {
+                    assertSame(page[i], pager.get((section * PAGE_SIZE) + i));
+                }
             }
         }
 
-        for (int section = 0; section < pager.pages(); section++) {
-            Object[] page = pager.page(section); // Generic arrays are returned as Object[]
-            assertTrue(page.length <= PAGE_SIZE);
-
-            for (int i = 0; i < page.length; i++) {
-                assertSame(page[i], pager.get((section * PAGE_SIZE) + i));
-            }
-        }
     }
 
 }

@@ -163,7 +163,7 @@ public class JavaSortedPager<T extends Comparable<T>> implements Pageable<T> {
      *
      * @param page the generic array to cache
      * @param pageIndex the index of the page of the data being stored
-     * @throws Exception if illegal caching or on caching error
+     * @throws CacheException if illegal caching or on caching error
      */
     private void cache(T[] page, int pageIndex) throws CacheException{
         if (!isCaching) throw new CacheException("Caching attempted while not enabled.");
