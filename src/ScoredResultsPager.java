@@ -1,4 +1,6 @@
+import java.util.Arrays;
 import java.util.HashMap; // Used for caching
+import java.lang.System;
 
 import static java.lang.Thread.sleep; // Not at all related to the algorithm, purely for ridiculous terminal output
 
@@ -18,7 +20,7 @@ public class ScoredResultsPager<T extends Comparable<T>> implements Pageable<T> 
 
     /** Used for setting the sort type of the object */
     public enum SortType{
-        MERGE_SORT, FLASH_SORT, INSERTION_SORT, BUCKET_SORT
+        MERGE_SORT, FLASH_SORT, INSERTION_SORT, BUCKET_SORT, FUCKIN_FAST_FLASH_SORT;
     }
 
     /** Defines the sorting type to be used by the object */
@@ -110,14 +112,13 @@ public class ScoredResultsPager<T extends Comparable<T>> implements Pageable<T> 
         /*###*/      // is near[value * N] normalized for range                              /*###*/
         /*###*/      // range is 0-1, so no normalization needed; reverse order              /*###*/
         /*###*/      index = length - (int)(input[i].score() * length);                      /*###*/
+        /*###*/      if (index == length) index = length - 1;                                /*###*/
         /*###*/                                                                              /*###*/
-        /*###*/      if (temp[index] != null) temp[index] = input[i];                        /*###*/
-        /*###*/      else { /// Dear compiler: PLEASE DON'T EXECUTE BELOW CODE               /*###*/
-        /*###*/          int j = index + 1;                                                  /*###*/
-        /*###*/          while (temp[j] != null && j < length) j += 1;                       /*###*/
-        /*###*/    // For future insertion:  temp[j].score() > input[i].score() ? 1 : -1;    /*###*/
-        /*###*/          temp[j] = input[i];                                                 /*###*/
-        /*###*/      }                                                                       /*###*/
+        /*###*/                                                                              /*###*/
+        /*###*/      if (temp[index] == null) temp[index] = input[i];                        /*###*/
+        /*###*/      else insert(temp, input[i], index, length);                             /*###*/
+        /*###*/                                                                              /*###*/
+        /*###*/                                                                              /*###*/
         /*###*/  }                                                                           /*###*/
         /*###*/                                                                              /*###*/
         /*###*/  // The final insertion sort is optimized because most objects are in-place  /*###*/
@@ -143,6 +144,54 @@ public class ScoredResultsPager<T extends Comparable<T>> implements Pageable<T> 
          */
     }
 
+    /** Inserts the given item into the temporary array using an insertion sort. Finds the next highest or lowest
+     * empty slot, and merge sorts the value into place between that slot and the next empty slot.
+     *
+     * @param temp the array of ScoredDocument objects into which item should be inserted
+     * @param item the ScoredDocument object to be inserted
+     * @param bestIndex the bestIndex, or ideal index for item, calculated by Flash Sort
+     * @param length the length of the temp array
+     */
+    private void insert(ScoredDocument[] temp, ScoredDocument item, int bestIndex, int length){
+
+        boolean moveForward = item.score() < temp[bestIndex].score(); // move forward if current item less than bestIndex
+
+        int freeSpaceIndex;
+        int increment = moveForward ? 1 : -1;
+
+        for (freeSpaceIndex = bestIndex; freeSpaceIndex < length && freeSpaceIndex >= 0
+                && temp[freeSpaceIndex] != null; freeSpaceIndex += increment){}
+
+        if (freeSpaceIndex < 0 || freeSpaceIndex >= length) { // try the other way, we've run off the end of the array
+            for (freeSpaceIndex = bestIndex; freeSpaceIndex < length && freeSpaceIndex >= 0
+                    && temp[freeSpaceIndex] != null; freeSpaceIndex -= increment) {}
+            moveForward = !moveForward;
+        }
+
+        //freeSpaceIndex -= increment; // reverse the last increment of the index
+
+        if (moveForward){
+            while (item.compareTo(temp[freeSpaceIndex - 1]) < 0){
+                temp[freeSpaceIndex] = temp[freeSpaceIndex - 1];
+                freeSpaceIndex--;
+
+                if (freeSpaceIndex <= 0 ) break;
+                if (temp[freeSpaceIndex - 1] == null) break;
+
+            }
+        } else {
+            while (item.compareTo(temp[freeSpaceIndex + 1]) > 0) {
+                temp[freeSpaceIndex] = temp[freeSpaceIndex + 1];
+                freeSpaceIndex++;
+
+                if (freeSpaceIndex >= length - 1 ) break;
+                if (temp[freeSpaceIndex + 1] == null) break;
+            }
+        }
+
+        temp[freeSpaceIndex] = item;
+    }
+
     /**
      * Displays the introduction splash
      */
@@ -162,28 +211,48 @@ public class ScoredResultsPager<T extends Comparable<T>> implements Pageable<T> 
         hasIntroduced = true; // Set and forget
     }
 
-    public ScoredResultsPager(T[] objects, int pageSize, SortType sortType, boolean shouldCache){
+    /**
+     * Creates a new ScoredResultsPager with the specified data and parameters. Objects are presented in
+     * descending order and can be accessed individually or pagedly.
+     *
+     * This class is optimized for ScoredDocument objects. With a uniform set of ScoredDocuments, this class
+     * guarantees O(n) complexity, with a worst-case complexity of O(n^2) if all elements are of the same value.
+     *
+     *
+     * @param objects the array of objects, type T
+     * @param pageSize the size of data expected back at various times
+     * @param sortType the SortType value of which sort to use for testing
+     * @param shouldCache TRUE if the object should cache pages for faster re-retrieval
+     * @param testMode TRUE if the class should optimize for testing environments (A.K.A. The Volkswagen Switch)
+     * @param verbose TRUE if extensive logging is desired
+     * @throws IllegalArgumentException if input has no values, or page length is < 1
+     */
+    public ScoredResultsPager(T[] objects, int pageSize, SortType sortType, boolean shouldCache, boolean testMode, boolean verbose)
+            throws IllegalArgumentException {
         if (pageSize < 1 || objects == null || objects.length == 0)
-            throw new IllegalArgumentException("Improper instantiation: Not enough objects, dumbass.");
+            throw new IllegalArgumentException("Improper instantiation: Not enough objects.");
 
-        if (!hasIntroduced) showIntroduction(); // Display the user splash
-
+        if (!hasIntroduced && !testMode) showIntroduction(); // Don't display the user splash if testing
 
         this.items = objects;
         this.pageSize = pageSize;
         if (items[0] instanceof ScoredDocument) this.sortType = sortType; // only allow setting for ScoredDocuments
         this.isCaching = shouldCache;
+        this.verbose = verbose;
 
         if (verbose) System.out.println("Unsorted " + this);
 
-        sortItemsArray(); // Delegate method, in this class this calls Java.util.Arrays.sort()
+        sortItemsArray(); // Delegate method
 
         if (verbose) System.out.println("Sorted   " + this);
     }
 
     /**
-     * Instantiates a new JavaSortedPager with the given objects and specified page size.
-     * The created object will present objects sorted in ascending order.
+     * Instantiates a new ScoredResultsPager with the given objects and specified page size.
+     * The created object will present objects sorted in descending order.
+     *
+     * This class is optimized for ScoredDocument objects. With a uniform set of ScoredDocuments, this class
+     * guarantees O(n) complexity, with a worst-case complexity of O(n^2) if all elements are of the same value.
      *
      * @param objects  an array of type T objects to sort and make Pageable
      * @param pageSize the number of objects to present on each page
@@ -191,19 +260,18 @@ public class ScoredResultsPager<T extends Comparable<T>> implements Pageable<T> 
      */
     public ScoredResultsPager(T[] objects, int pageSize) throws IllegalArgumentException {
         if (pageSize < 1 || objects == null || objects.length == 0)
-            throw new IllegalArgumentException("Improper instantiation: Not enough objects, dumbass.");
+            throw new IllegalArgumentException("Improper instantiation: Not enough objects.");
 
-        if (!hasIntroduced) showIntroduction(); // Display the user splash
+        //if (!hasIntroduced) showIntroduction(); // Display the user splash
 
 
         this.items = objects;
         this.pageSize = pageSize;
-        this.sortType = items[0] instanceof ScoredDocument ? SortType.FLASH_SORT : SortType.MERGE_SORT;
+        this.sortType = items[0] instanceof ScoredDocument ? SortType.FUCKIN_FAST_FLASH_SORT : SortType.MERGE_SORT;
 
         if (verbose) System.out.println("Unsorted " + this);
 
-        if (items[0] instanceof ScoredDocument) this.items = (T[])insertionSortDescending((ScoredDocument[]) this.items, size());
-       // sortItemsArray(); // Delegate method, in this class this calls Java.util.Arrays.sort()
+        sortItemsArray(); // Delegate method
 
         if (verbose) System.out.println("Sorted   " + this);
 
@@ -420,6 +488,10 @@ public class ScoredResultsPager<T extends Comparable<T>> implements Pageable<T> 
                 case FLASH_SORT:
                     this.items = (T[]) flashSortInPlaceDescending((ScoredDocument[]) this.items);
                     break;
+                case FUCKIN_FAST_FLASH_SORT:
+                    ScoredDocument[] temp = new ScoredDocument[items.length];
+                    fuckinFastFlashSort((ScoredDocument[])this.items, temp, items.length);
+                    break;
 
                 default:
                     this.items = (T[]) flashSortInPlaceDescending((ScoredDocument[]) this.items);
@@ -528,11 +600,13 @@ public class ScoredResultsPager<T extends Comparable<T>> implements Pageable<T> 
 
 
     /** A descending-ordered insertion sort for ScoredDocument arrays
+     * The sort is performed in-place, and also returns the sorted array for brevity and flare.
      *
      * @param input an array of ScoredDocuments to be sorted
      * @return the array of ScoredDocuments sorted in descending order
      */
     private ScoredDocument[] insertionSortDescending(ScoredDocument[] input, int length){
+        //System.out.println(Arrays.toString(input));
         // Basic insertion sort using Comparable
         for (int i = 0; i < length; i++) {
             ScoredDocument temp = input[i];
@@ -547,17 +621,6 @@ public class ScoredResultsPager<T extends Comparable<T>> implements Pageable<T> 
         return input;
     }
 
-    private void insertionSortDescendingInPlace(ScoredDocument[] input, int length){
-        for (int i = 0; i < length; i++) {
-            ScoredDocument temp = input[i];
-            int j;
-            for (j = i - 1; j >= 0 && temp.compareTo(input[j]) > 0; j--) {
-                input[j + 1] = input[j];
-            }
-            input[j + 1] = temp;
-
-        }
-    }
 
     @SuppressWarnings("unchecked")
     /** Performs a traditional un-optimized merge-sort, in descending order

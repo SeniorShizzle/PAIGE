@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.lang.System;
 
 public class PAIGE {
 
@@ -46,8 +47,13 @@ public class PAIGE {
         javaSortedPager.setShouldCache(false);
         javaSortedPager.page(1);
         long stopJavaSorted = System.nanoTime();
-        ScoredResultsPager<ScoredDocument> scoredResultsPager = new ScoredResultsPager<>(selfSortedTestArray, pageSize);
-        scoredResultsPager.setShouldCache(false);
+//        ScoredResultsPager<ScoredDocument> scoredResultsPager =
+//                new ScoredResultsPager<>(
+//                selfSortedTestArray,
+//                pageSize,
+//                ScoredResultsPager.SortType.FUCKIN_FAST_FLASH_SORT,
+//                false, true, false);
+        ScoredResultsPager<ScoredDocument> scoredResultsPager = new ScoredResultsPager<ScoredDocument>(selfSortedTestArray, pageSize);
         javaSortedPager.page(1);
         long stopSelfSorted = System.nanoTime();
 

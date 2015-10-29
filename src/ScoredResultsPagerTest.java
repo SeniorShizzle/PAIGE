@@ -40,7 +40,7 @@ public class ScoredResultsPagerTest {
     public static final int TEST_SIZE = 100;
     public static final int PAGE_SIZE = 40;
     public static final boolean RANDOM = false;
-    public static final boolean testCaching = true;
+    public static final boolean testCaching = false;
     public static final boolean useScoredDocuments = true;
 
     ScoredResultsPager<TestObject> pager;
@@ -55,9 +55,13 @@ public class ScoredResultsPagerTest {
         if (pager == null) {
             if (useScoredDocuments) {
                 this.testArray = Lab2.generateScoredDocuments(TEST_SIZE);
-                documentPager = new ScoredResultsPager<>((ScoredDocument[])testArray, PAGE_SIZE);
-                documentPager.setVerbose(true);
-                documentPager.setShouldCache(testCaching);
+                documentPager = new ScoredResultsPager<>(
+                        (ScoredDocument[])testArray,
+                        PAGE_SIZE,
+                        ScoredResultsPager.SortType.FUCKIN_FAST_FLASH_SORT,
+                        testCaching,
+                        true,
+                        false);
 
             } else {
                 this.testArray = new TestObject[TEST_SIZE];
