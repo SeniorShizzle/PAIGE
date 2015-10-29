@@ -20,7 +20,7 @@ public class JavaSortedPager<T extends Comparable<T>> implements Pageable<T> {
     private int pageSize;
 
     /** TRUE for extensive pattern logging */
-    private boolean verbose = true;
+    private boolean verbose = false;
 
     /** TRUE if the object will cache the results of page requests for performance */
     private boolean isCaching = false;

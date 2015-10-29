@@ -38,10 +38,10 @@ public class ScoredResultsPagerTest {
 
 
     public static final int TEST_SIZE = 100;
-    public static final int PAGE_SIZE = 45;
+    public static final int PAGE_SIZE = 40;
     public static final boolean RANDOM = false;
     public static final boolean testCaching = true;
-    public static final boolean useScoredDocuments = false;
+    public static final boolean useScoredDocuments = true;
 
     ScoredResultsPager<TestObject> pager;
     ScoredResultsPager<ScoredDocument> documentPager;
@@ -108,10 +108,16 @@ public class ScoredResultsPagerTest {
     @Test
     /** Tests whether the collection is sorted properly after instantiation */
     public void testSort() {
-        if (!useScoredDocuments)
-        for (int test = 0; test < TEST_SIZE - 1; test += 1) { // Test some number of random values
-            // Test whether each value is less than the next value
-            assert (pager.get(test).compareTo(pager.get(test + 1)) > 0); // compareTo should return < 0 if a < b
+        if (useScoredDocuments){
+            for (int test = 0; test < TEST_SIZE - 1; test += 1) { // Test some number of random values
+                // Test whether each value is less than the next value
+                assert (documentPager.get(test).compareTo(documentPager.get(test + 1)) >= 0); // compareTo should return < 0 if a < b
+            }
+        }else {
+            for (int test = 0; test < TEST_SIZE - 1; test += 1) { // Test some number of random values
+                // Test whether each value is less than the next value
+                assert (pager.get(test).compareTo(pager.get(test + 1)) >= 0); // compareTo should return < 0 if a < b
+            }
         }
     }
 
