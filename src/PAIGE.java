@@ -32,8 +32,8 @@ public class PAIGE {
 //        }
 
 
-        int testSize = 10000;
-        int pageSize = 1;
+        int testSize = 20;
+        int pageSize = 100;
 
         ScoredDocument[] javaSortedTestArray = Lab2.generateScoredDocuments(testSize);
         ScoredDocument[] selfSortedTestArray = new ScoredDocument[testSize];
@@ -45,22 +45,23 @@ public class PAIGE {
         long startJavaSorted = System.nanoTime();
         JavaSortedPager<ScoredDocument> javaSortedPager = new JavaSortedPager<>(javaSortedTestArray, pageSize);
         javaSortedPager.setShouldCache(false);
-        javaSortedPager.page(1);
+        javaSortedPager.page(0);
         long stopJavaSorted = System.nanoTime();
-//        ScoredResultsPager<ScoredDocument> scoredResultsPager =
-//                new ScoredResultsPager<>(
-//                selfSortedTestArray,
-//                pageSize,
-//                ScoredResultsPager.SortType.FUCKIN_FAST_FLASH_SORT,
-//                false, true, false);
-        ScoredResultsPager<ScoredDocument> scoredResultsPager = new ScoredResultsPager<ScoredDocument>(selfSortedTestArray, pageSize);
-        javaSortedPager.page(1);
+        ScoredResultsPager<ScoredDocument> scoredResultsPager =
+                new ScoredResultsPager<>(
+                selfSortedTestArray,
+                pageSize,
+                ScoredResultsPager.SortType.FUCKIN_FAST_FLASH_SORT,
+                false, true, false);
+//        ScoredResultsPager<ScoredDocument> scoredResultsPager = new ScoredResultsPager<ScoredDocument>(selfSortedTestArray, pageSize);
+//        scoredResultsPager.setShouldCache(false);
+        scoredResultsPager.page(0);
         long stopSelfSorted = System.nanoTime();
 
         long javaSortedTime = stopJavaSorted - startJavaSorted;
         long selfSortedTime = stopSelfSorted - stopJavaSorted;
         System.out.println("Java ran in " + javaSortedTime + ", your sort ran in " + selfSortedTime +
-                " meaning your sort was faster for " + testSize + " objects by " + ((javaSortedTime - selfSortedTime)) + " nanoseconds. Good work!");
+                " meaning your sort was faster for " + testSize + " objects by " + ((javaSortedTime - selfSortedTime) / 1000000.0) + " milliseconds. Good work!");
 
 
 

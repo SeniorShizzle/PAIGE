@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0fa7ef75-063b-416a-8c66-46fe73057ef8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/System.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PAIGE/JavaSortedPager.class" afterPath="$PROJECT_DIR$/out/production/PAIGE/JavaSortedPager.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PAIGE/PAIGE.class" afterPath="$PROJECT_DIR$/out/production/PAIGE/PAIGE.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PAIGE/ScoredResultsPager.class" afterPath="$PROJECT_DIR$/out/production/PAIGE/ScoredResultsPager.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/JavaSortedPager.java" afterPath="$PROJECT_DIR$/src/JavaSortedPager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PAIGE.java" afterPath="$PROJECT_DIR$/src/PAIGE.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ScoredResultsPager.java" afterPath="$PROJECT_DIR$/src/ScoredResultsPager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ScoredResultsPagerTest.java" afterPath="$PROJECT_DIR$/src/ScoredResultsPagerTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="PAIGE.iws" />
@@ -45,8 +45,11 @@
         <entry file="file://$PROJECT_DIR$/src/JavaSortedPager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="51" column="21" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
-              <folding />
+              <caret line="133" column="0" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
+              <folding>
+                <element signature="e#3318#3319#0" expanded="true" />
+                <element signature="e#3395#3396#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -55,7 +58,7 @@
         <entry file="file://$PROJECT_DIR$/src/ScoredResultsPagerTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="52" column="42" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="42" />
+              <caret line="46" column="47" selection-start-line="46" selection-start-column="39" selection-end-line="46" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -64,8 +67,8 @@
       <file leaf-file-name="ScoredResultsPager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ScoredResultsPager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6965742">
-              <caret line="508" column="0" selection-start-line="508" selection-start-column="0" selection-end-line="508" selection-end-column="0" />
+            <state vertical-scroll-proportion="3.018868">
+              <caret line="192" column="9" selection-start-line="192" selection-start-column="9" selection-end-line="192" selection-end-column="9" />
               <folding>
                 <element signature="docComment;class#ScoredResultsPager#0" expanded="true" />
                 <element signature="docComment;class#SortType#0;class#ScoredResultsPager#0" expanded="true" />
@@ -85,34 +88,15 @@
                 <element signature="docComment;method#ScoredResultsPager#1;class#ScoredResultsPager#0" expanded="true" />
                 <element signature="docComment;method#get#0;class#ScoredResultsPager#0" expanded="true" />
                 <element signature="docComment;method#min#0;class#ScoredResultsPager#0" expanded="true" />
-                <element signature="e#13637#13638#0" expanded="true" />
-                <element signature="e#13675#13676#0" expanded="true" />
                 <element signature="docComment;method#max#0;class#ScoredResultsPager#0" expanded="true" />
-                <element signature="e#13854#13855#0" expanded="true" />
-                <element signature="e#13883#13884#0" expanded="true" />
-                <element signature="e#14007#14008#0" expanded="true" />
-                <element signature="e#14042#14043#0" expanded="true" />
-                <element signature="e#14174#14175#0" expanded="true" />
-                <element signature="e#14210#14211#0" expanded="true" />
-                <element signature="e#14330#14331#0" expanded="true" />
-                <element signature="e#14410#14411#0" expanded="true" />
-                <element signature="e#14431#14461#0" expanded="true" />
                 <element signature="docComment;method#cache#0;class#ScoredResultsPager#0" expanded="true" />
                 <element signature="docComment;method#retrieveCachedPage#0;class#ScoredResultsPager#0" expanded="true" />
                 <element signature="docComment;method#setVerbose#0;class#ScoredResultsPager#0" expanded="true" />
-                <element signature="e#18560#18561#0" expanded="true" />
-                <element signature="e#18598#18599#0" expanded="true" />
                 <element signature="docComment;method#setShouldCache#0;class#ScoredResultsPager#0" expanded="true" />
-                <element signature="e#18867#18868#0" expanded="true" />
-                <element signature="e#18911#18912#0" expanded="true" />
                 <element signature="docComment;method#cachingEnabled#0;class#ScoredResultsPager#0" expanded="true" />
-                <element signature="e#19023#19024#0" expanded="true" />
-                <element signature="e#19055#19056#0" expanded="true" />
-                <element signature="e#19062#19092#0" expanded="true" />
                 <element signature="docComment;method#createBuckets#0;class#ScoredResultsPager#0" expanded="true" />
                 <element signature="docComment;method#flashSortInPlaceDescending#0;class#ScoredResultsPager#0" expanded="true" />
                 <element signature="docComment;method#insertionSortDescending#0;class#ScoredResultsPager#0" expanded="true" />
-                <element signature="e#26242#26272#0" expanded="true" />
                 <element signature="docComment;method#mergeSortDescending#1;class#ScoredResultsPager#0" expanded="true" />
                 <element signature="docComment;method#mergeDescending#0;class#ScoredResultsPager#0" expanded="true" />
               </folding>
@@ -120,15 +104,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="System.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/System.java">
+      <file leaf-file-name="PAIGE.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/PAIGE.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="21" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
-              <folding>
-                <element signature="e#108#109#0" expanded="true" />
-                <element signature="e#163#164#0" expanded="true" />
-              </folding>
+              <caret line="34" column="24" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -140,18 +121,6 @@
               <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding>
                 <element signature="e#541#542#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PAIGE.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PAIGE.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="55" column="43" selection-start-line="55" selection-start-column="43" selection-end-line="55" selection-end-column="43" />
-              <folding>
-                <element signature="e#2109#2125#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -182,8 +151,8 @@
         <option value="$PROJECT_DIR$/src/JavaSortedPagerTest.java" />
         <option value="$PROJECT_DIR$/src/ScoredDocument.java" />
         <option value="$PROJECT_DIR$/src/System.java" />
-        <option value="$PROJECT_DIR$/src/JavaSortedPager.java" />
         <option value="$PROJECT_DIR$/src/ScoredResultsPagerTest.java" />
+        <option value="$PROJECT_DIR$/src/JavaSortedPager.java" />
         <option value="$PROJECT_DIR$/src/PAIGE.java" />
         <option value="$PROJECT_DIR$/src/ScoredResultsPager.java" />
       </list>
@@ -633,7 +602,9 @@
       <workItem from="1445449213042" duration="21229000" />
       <workItem from="1445736198129" duration="12522000" />
       <workItem from="1445883851325" duration="2358000" />
-      <workItem from="1446010645178" duration="32846000" />
+      <workItem from="1446010645178" duration="36188000" />
+      <workItem from="1446138996256" duration="324000" />
+      <workItem from="1446266950447" duration="22000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <created>1445366722941</created>
@@ -701,11 +672,17 @@
       <option name="project" value="LOCAL" />
       <updated>1446083597839</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Finished writing all sorts, cleaned up methods and comments, and starting to find optimizations.">
+      <created>1446104297582</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1446104297582</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70935000" />
+    <option name="totallyTimeSpent" value="74623000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -718,22 +695,22 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3989796" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32887402" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24749164" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22466423" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24908425" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34591836" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="true" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="185" y="114" width="1316" height="773" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34591836" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3989796" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24749164" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -761,11 +738,20 @@
     <MESSAGE value="Before attempting custom sorting algorithm." />
     <MESSAGE value="Custom sorting algorithm completed. Updated JUnit tests" />
     <MESSAGE value="Finished writing Fuckin' Fast™ Flash Sort" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished writing Fuckin' Fast™ Flash Sort" />
+    <MESSAGE value="Finished writing all sorts, cleaned up methods and comments, and starting to find optimizations." />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished writing all sorts, cleaned up methods and comments, and starting to find optimizations." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="21" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ScoredResultsPager.java</url>
+          <line>115</line>
+          <properties />
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="22" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
@@ -783,6 +769,107 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/PAIGE.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="24" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ScoredDocument.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding>
+            <element signature="e#541#542#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/JavaSortedPagerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="152" column="1" selection-start-line="152" selection-start-column="1" selection-end-line="152" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/JavaSortedPager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="133" column="0" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
+          <folding>
+            <element signature="e#3318#3319#0" expanded="true" />
+            <element signature="e#3395#3396#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ScoredResultsPagerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="47" selection-start-line="46" selection-start-column="39" selection-end-line="46" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ScoredResultsPager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="183" column="80" selection-start-line="183" selection-start-column="80" selection-end-line="183" selection-end-column="80" />
+          <folding>
+            <element signature="docComment;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;class#SortType#0;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="class#SortType#0;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;field#sortType#0;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;field#items#0;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;field#pageSize#0;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;field#verbose#0;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;field#isCaching#0;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;field#cache#0;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;field#hasIntroduced#0;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;field#numberOfBuckets#0;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;method#fuckinFastFlashSort#0;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;method#insert#0;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;method#showIntroduction#0;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;method#ScoredResultsPager#0;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;method#ScoredResultsPager#1;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;method#get#0;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;method#min#0;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;method#max#0;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;method#cache#0;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;method#retrieveCachedPage#0;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;method#setVerbose#0;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;method#setShouldCache#0;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;method#cachingEnabled#0;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;method#createBuckets#0;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;method#flashSortInPlaceDescending#0;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;method#insertionSortDescending#0;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;method#mergeSortDescending#1;class#ScoredResultsPager#0" expanded="true" />
+            <element signature="docComment;method#mergeDescending#0;class#ScoredResultsPager#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PAIGE.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="24" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ScoredDocument.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding>
+            <element signature="e#541#542#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/JavaSortedPagerTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -803,7 +890,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="189" column="7" selection-start-line="189" selection-start-column="7" selection-end-line="189" selection-end-column="7" />
-          <folding />
+          <folding>
+            <element signature="e#3318#3319#0" expanded="true" />
+            <element signature="e#3395#3396#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -830,34 +920,15 @@
             <element signature="docComment;method#ScoredResultsPager#1;class#ScoredResultsPager#0" expanded="true" />
             <element signature="docComment;method#get#0;class#ScoredResultsPager#0" expanded="true" />
             <element signature="docComment;method#min#0;class#ScoredResultsPager#0" expanded="true" />
-            <element signature="e#13637#13638#0" expanded="true" />
-            <element signature="e#13675#13676#0" expanded="true" />
             <element signature="docComment;method#max#0;class#ScoredResultsPager#0" expanded="true" />
-            <element signature="e#13854#13855#0" expanded="true" />
-            <element signature="e#13883#13884#0" expanded="true" />
-            <element signature="e#14007#14008#0" expanded="true" />
-            <element signature="e#14042#14043#0" expanded="true" />
-            <element signature="e#14174#14175#0" expanded="true" />
-            <element signature="e#14210#14211#0" expanded="true" />
-            <element signature="e#14330#14331#0" expanded="true" />
-            <element signature="e#14410#14411#0" expanded="true" />
-            <element signature="e#14431#14461#0" expanded="true" />
             <element signature="docComment;method#cache#0;class#ScoredResultsPager#0" expanded="true" />
             <element signature="docComment;method#retrieveCachedPage#0;class#ScoredResultsPager#0" expanded="true" />
             <element signature="docComment;method#setVerbose#0;class#ScoredResultsPager#0" expanded="true" />
-            <element signature="e#18560#18561#0" expanded="true" />
-            <element signature="e#18598#18599#0" expanded="true" />
             <element signature="docComment;method#setShouldCache#0;class#ScoredResultsPager#0" expanded="true" />
-            <element signature="e#18867#18868#0" expanded="true" />
-            <element signature="e#18911#18912#0" expanded="true" />
             <element signature="docComment;method#cachingEnabled#0;class#ScoredResultsPager#0" expanded="true" />
-            <element signature="e#19023#19024#0" expanded="true" />
-            <element signature="e#19055#19056#0" expanded="true" />
-            <element signature="e#19062#19092#0" expanded="true" />
             <element signature="docComment;method#createBuckets#0;class#ScoredResultsPager#0" expanded="true" />
             <element signature="docComment;method#flashSortInPlaceDescending#0;class#ScoredResultsPager#0" expanded="true" />
             <element signature="docComment;method#insertionSortDescending#0;class#ScoredResultsPager#0" expanded="true" />
-            <element signature="e#26242#26272#0" expanded="true" />
             <element signature="docComment;method#mergeSortDescending#1;class#ScoredResultsPager#0" expanded="true" />
             <element signature="docComment;method#mergeDescending#0;class#ScoredResultsPager#0" expanded="true" />
           </folding>
@@ -902,7 +973,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="189" column="7" selection-start-line="189" selection-start-column="7" selection-end-line="189" selection-end-column="7" />
-          <folding />
+          <folding>
+            <element signature="e#3318#3319#0" expanded="true" />
+            <element signature="e#3395#3396#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -929,34 +1003,15 @@
             <element signature="docComment;method#ScoredResultsPager#1;class#ScoredResultsPager#0" expanded="true" />
             <element signature="docComment;method#get#0;class#ScoredResultsPager#0" expanded="true" />
             <element signature="docComment;method#min#0;class#ScoredResultsPager#0" expanded="true" />
-            <element signature="e#13637#13638#0" expanded="true" />
-            <element signature="e#13675#13676#0" expanded="true" />
             <element signature="docComment;method#max#0;class#ScoredResultsPager#0" expanded="true" />
-            <element signature="e#13854#13855#0" expanded="true" />
-            <element signature="e#13883#13884#0" expanded="true" />
-            <element signature="e#14007#14008#0" expanded="true" />
-            <element signature="e#14042#14043#0" expanded="true" />
-            <element signature="e#14174#14175#0" expanded="true" />
-            <element signature="e#14210#14211#0" expanded="true" />
-            <element signature="e#14330#14331#0" expanded="true" />
-            <element signature="e#14410#14411#0" expanded="true" />
-            <element signature="e#14431#14461#0" expanded="true" />
             <element signature="docComment;method#cache#0;class#ScoredResultsPager#0" expanded="true" />
             <element signature="docComment;method#retrieveCachedPage#0;class#ScoredResultsPager#0" expanded="true" />
             <element signature="docComment;method#setVerbose#0;class#ScoredResultsPager#0" expanded="true" />
-            <element signature="e#18560#18561#0" expanded="true" />
-            <element signature="e#18598#18599#0" expanded="true" />
             <element signature="docComment;method#setShouldCache#0;class#ScoredResultsPager#0" expanded="true" />
-            <element signature="e#18867#18868#0" expanded="true" />
-            <element signature="e#18911#18912#0" expanded="true" />
             <element signature="docComment;method#cachingEnabled#0;class#ScoredResultsPager#0" expanded="true" />
-            <element signature="e#19023#19024#0" expanded="true" />
-            <element signature="e#19055#19056#0" expanded="true" />
-            <element signature="e#19062#19092#0" expanded="true" />
             <element signature="docComment;method#createBuckets#0;class#ScoredResultsPager#0" expanded="true" />
             <element signature="docComment;method#flashSortInPlaceDescending#0;class#ScoredResultsPager#0" expanded="true" />
             <element signature="docComment;method#insertionSortDescending#0;class#ScoredResultsPager#0" expanded="true" />
-            <element signature="e#26242#26272#0" expanded="true" />
             <element signature="docComment;method#mergeSortDescending#1;class#ScoredResultsPager#0" expanded="true" />
             <element signature="docComment;method#mergeDescending#0;class#ScoredResultsPager#0" expanded="true" />
           </folding>
@@ -985,7 +1040,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#3318#3319#0" expanded="true" />
+            <element signature="e#3395#3396#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1001,7 +1059,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#3318#3319#0" expanded="true" />
+            <element signature="e#3395#3396#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1084,7 +1145,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.962963">
           <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1092,11 +1152,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.962963">
           <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding>
-            <element signature="e#765#766#0" expanded="true" />
-            <element signature="e#805#806#0" expanded="true" />
-            <element signature="e#888#889#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1104,11 +1159,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.962963">
           <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
-          <folding>
-            <element signature="class#SafeNotifier#0;class#RunNotifier#0" expanded="true" />
-            <element signature="e#3804#3805#0" expanded="true" />
-            <element signature="e#3869#3870#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1116,7 +1166,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.962963">
           <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1124,7 +1173,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.296296">
           <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1132,12 +1180,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.962963">
           <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-          <folding>
-            <element signature="e#629#630#0" expanded="true" />
-            <element signature="e#680#681#0" expanded="true" />
-            <element signature="e#1888#1889#0" expanded="true" />
-            <element signature="e#1934#1935#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1145,10 +1187,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.296296">
           <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding>
-            <element signature="e#841#1035#0" expanded="true" />
-            <element signature="e#1034#1035#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1156,7 +1194,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.296296">
           <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1164,7 +1201,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.962963">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1172,7 +1208,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.296296">
           <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1180,9 +1215,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.962963">
           <caret line="132" column="0" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
-          <folding>
-            <element signature="e#5056#5204#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1198,10 +1230,33 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="21" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ScoredResultsPagerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="47" selection-start-line="46" selection-start-column="39" selection-end-line="46" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/JavaSortedPager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="133" column="0" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
           <folding>
-            <element signature="e#108#109#0" expanded="true" />
-            <element signature="e#163#164#0" expanded="true" />
+            <element signature="e#3318#3319#0" expanded="true" />
+            <element signature="e#3395#3396#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PAIGE.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="24" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1215,36 +1270,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/JavaSortedPager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="21" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ScoredResultsPagerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="52" column="42" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PAIGE.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="55" column="43" selection-start-line="55" selection-start-column="43" selection-end-line="55" selection-end-column="43" />
-          <folding>
-            <element signature="e#2109#2125#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ScoredResultsPager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6965742">
-          <caret line="508" column="0" selection-start-line="508" selection-start-column="0" selection-end-line="508" selection-end-column="0" />
+        <state vertical-scroll-proportion="3.018868">
+          <caret line="192" column="9" selection-start-line="192" selection-start-column="9" selection-end-line="192" selection-end-column="9" />
           <folding>
             <element signature="docComment;class#ScoredResultsPager#0" expanded="true" />
             <element signature="docComment;class#SortType#0;class#ScoredResultsPager#0" expanded="true" />
@@ -1264,34 +1293,15 @@
             <element signature="docComment;method#ScoredResultsPager#1;class#ScoredResultsPager#0" expanded="true" />
             <element signature="docComment;method#get#0;class#ScoredResultsPager#0" expanded="true" />
             <element signature="docComment;method#min#0;class#ScoredResultsPager#0" expanded="true" />
-            <element signature="e#13637#13638#0" expanded="true" />
-            <element signature="e#13675#13676#0" expanded="true" />
             <element signature="docComment;method#max#0;class#ScoredResultsPager#0" expanded="true" />
-            <element signature="e#13854#13855#0" expanded="true" />
-            <element signature="e#13883#13884#0" expanded="true" />
-            <element signature="e#14007#14008#0" expanded="true" />
-            <element signature="e#14042#14043#0" expanded="true" />
-            <element signature="e#14174#14175#0" expanded="true" />
-            <element signature="e#14210#14211#0" expanded="true" />
-            <element signature="e#14330#14331#0" expanded="true" />
-            <element signature="e#14410#14411#0" expanded="true" />
-            <element signature="e#14431#14461#0" expanded="true" />
             <element signature="docComment;method#cache#0;class#ScoredResultsPager#0" expanded="true" />
             <element signature="docComment;method#retrieveCachedPage#0;class#ScoredResultsPager#0" expanded="true" />
             <element signature="docComment;method#setVerbose#0;class#ScoredResultsPager#0" expanded="true" />
-            <element signature="e#18560#18561#0" expanded="true" />
-            <element signature="e#18598#18599#0" expanded="true" />
             <element signature="docComment;method#setShouldCache#0;class#ScoredResultsPager#0" expanded="true" />
-            <element signature="e#18867#18868#0" expanded="true" />
-            <element signature="e#18911#18912#0" expanded="true" />
             <element signature="docComment;method#cachingEnabled#0;class#ScoredResultsPager#0" expanded="true" />
-            <element signature="e#19023#19024#0" expanded="true" />
-            <element signature="e#19055#19056#0" expanded="true" />
-            <element signature="e#19062#19092#0" expanded="true" />
             <element signature="docComment;method#createBuckets#0;class#ScoredResultsPager#0" expanded="true" />
             <element signature="docComment;method#flashSortInPlaceDescending#0;class#ScoredResultsPager#0" expanded="true" />
             <element signature="docComment;method#insertionSortDescending#0;class#ScoredResultsPager#0" expanded="true" />
-            <element signature="e#26242#26272#0" expanded="true" />
             <element signature="docComment;method#mergeSortDescending#1;class#ScoredResultsPager#0" expanded="true" />
             <element signature="docComment;method#mergeDescending#0;class#ScoredResultsPager#0" expanded="true" />
           </folding>

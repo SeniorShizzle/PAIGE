@@ -23,6 +23,8 @@ public class ScoredResultsPager<T extends Comparable<T>> implements Pageable<T> 
         MERGE_SORT, FLASH_SORT, INSERTION_SORT, BUCKET_SORT, FUCKIN_FAST_FLASH_SORT;
     }
 
+    public long insertionMoves;
+
     /** Defines the sorting type to be used by the object */
     private SortType sortType = SortType.MERGE_SORT;
 
@@ -154,7 +156,7 @@ public class ScoredResultsPager<T extends Comparable<T>> implements Pageable<T> 
      */
     private void insert(ScoredDocument[] temp, ScoredDocument item, int bestIndex, int length){
 
-        boolean moveForward = item.score() < temp[bestIndex].score(); // move forward if current item less than bestIndex
+        boolean moveForward = item.score() >= temp[bestIndex].score(); // move forward if current item less than bestIndex
 
         int freeSpaceIndex;
         int increment = moveForward ? 1 : -1;
@@ -171,21 +173,22 @@ public class ScoredResultsPager<T extends Comparable<T>> implements Pageable<T> 
         //freeSpaceIndex -= increment; // reverse the last increment of the index
 
         if (moveForward){
-            while (item.compareTo(temp[freeSpaceIndex - 1]) < 0){
+            while (item.compareTo(temp[freeSpaceIndex - 1]) > 0){
                 temp[freeSpaceIndex] = temp[freeSpaceIndex - 1];
                 freeSpaceIndex--;
 
                 if (freeSpaceIndex <= 0 ) break;
                 if (temp[freeSpaceIndex - 1] == null) break;
-
+                insertionMoves++;
             }
-        } else {
-            while (item.compareTo(temp[freeSpaceIndex + 1]) > 0) {
+        } else { //TODO: CompareTo in the insertion sort is not working properly
+            while (item.compareTo(temp[freeSpaceIndex + 1]) < 0) {
                 temp[freeSpaceIndex] = temp[freeSpaceIndex + 1];
                 freeSpaceIndex++;
 
                 if (freeSpaceIndex >= length - 1 ) break;
                 if (temp[freeSpaceIndex + 1] == null) break;
+                insertionMoves++;
             }
         }
 
@@ -243,6 +246,7 @@ public class ScoredResultsPager<T extends Comparable<T>> implements Pageable<T> 
         if (verbose) System.out.println("Unsorted " + this);
 
         sortItemsArray(); // Delegate method
+        System.out.println(insertionMoves + " moves needed in insertion()");
 
         if (verbose) System.out.println("Sorted   " + this);
     }
@@ -346,6 +350,7 @@ public class ScoredResultsPager<T extends Comparable<T>> implements Pageable<T> 
      * @returns an Object[] NOT a T[] !!!!!
      */
     public T[] page(int i) {
+        if (i >= pages() || i < 0) throw new IndexOutOfBoundsException("Attempting to access invalid page: " + i);
         T[] retArray;
 
         if (isCaching) {
@@ -606,7 +611,7 @@ public class ScoredResultsPager<T extends Comparable<T>> implements Pageable<T> 
      * @return the array of ScoredDocuments sorted in descending order
      */
     private ScoredDocument[] insertionSortDescending(ScoredDocument[] input, int length){
-        //System.out.println(Arrays.toString(input));
+        System.out.println(Arrays.toString(input));
         // Basic insertion sort using Comparable
         for (int i = 0; i < length; i++) {
             ScoredDocument temp = input[i];

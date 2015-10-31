@@ -60,7 +60,7 @@ public class JavaSortedPager<T extends Comparable<T>> implements Pageable<T> {
      * @throws IndexOutOfBoundsException on attempt to access index not in range
      */
     public T get(int i) throws IndexOutOfBoundsException{
-        if (i < 0 || i > size() || this.items == null) throw new IndexOutOfBoundsException("Attempting to access invalid index.");
+        if (i < 0 || i > size() || this.items == null) throw new IndexOutOfBoundsException("Attempting to access invalid index: " + i);
 
         return items[i];
     }
@@ -118,6 +118,8 @@ public class JavaSortedPager<T extends Comparable<T>> implements Pageable<T> {
      * @returns an Object[] NOT a T[] !!!!!
      */
     public T[] page(int i) {
+        if (i >= pages() || i < 0) throw new IndexOutOfBoundsException("Attempting to access invalid page: " + i);
+
         T[] retArray;
 
         if (isCaching){
@@ -131,7 +133,7 @@ public class JavaSortedPager<T extends Comparable<T>> implements Pageable<T> {
         }
 
         //int pageSize = pageSize(); // store for efficiency in following ternary
-        int pageSize = i == pages() - 1 ? size() % pageSize() : pageSize();
+        int pageSize = i == pages() - 1 || size() < pageSize() ? size() % pageSize() : pageSize();
         retArray = (T[]) new Comparable[pageSize];
 
         int copyIndex = 0;
