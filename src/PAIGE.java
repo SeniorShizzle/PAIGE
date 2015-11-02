@@ -32,37 +32,43 @@ public class PAIGE {
 //        }
 
 
-        int testSize = 20;
+        int testSize = 100;
         int pageSize = 100;
 
-        ScoredDocument[] javaSortedTestArray = Lab2.generateScoredDocuments(testSize);
-        ScoredDocument[] selfSortedTestArray = new ScoredDocument[testSize];
+        System.out.println("Test Size, Java Run Time, Custom Run Time");
 
-        System.arraycopy(javaSortedTestArray, 0, selfSortedTestArray, 0, testSize); // Start with two identical arrays
+        for (int i = 0; i < 10; i++) {
 
-        assert javaSortedTestArray != selfSortedTestArray;
 
-        long startJavaSorted = System.nanoTime();
-        JavaSortedPager<ScoredDocument> javaSortedPager = new JavaSortedPager<>(javaSortedTestArray, pageSize);
-        javaSortedPager.setShouldCache(false);
-        javaSortedPager.page(0);
-        long stopJavaSorted = System.nanoTime();
-        ScoredResultsPager<ScoredDocument> scoredResultsPager =
-                new ScoredResultsPager<>(
-                selfSortedTestArray,
-                pageSize,
-                ScoredResultsPager.SortType.FUCKIN_FAST_FLASH_SORT,
-                false, true, false);
-//        ScoredResultsPager<ScoredDocument> scoredResultsPager = new ScoredResultsPager<ScoredDocument>(selfSortedTestArray, pageSize);
-//        scoredResultsPager.setShouldCache(false);
-        scoredResultsPager.page(0);
-        long stopSelfSorted = System.nanoTime();
+            ScoredDocument[] javaSortedTestArray = Lab2.generateScoredDocuments(testSize);
+            ScoredDocument[] selfSortedTestArray = new ScoredDocument[testSize];
 
-        long javaSortedTime = stopJavaSorted - startJavaSorted;
-        long selfSortedTime = stopSelfSorted - stopJavaSorted;
-        System.out.println("Java ran in " + javaSortedTime + ", your sort ran in " + selfSortedTime +
-                " meaning your sort was faster for " + testSize + " objects by " + ((javaSortedTime - selfSortedTime) / 1000000.0) + " milliseconds. Good work!");
+            System.arraycopy(javaSortedTestArray, 0, selfSortedTestArray, 0, testSize); // Start with two identical arrays
 
+            assert javaSortedTestArray != selfSortedTestArray;
+
+            long startJavaSorted = System.nanoTime();
+            JavaSortedPager<ScoredDocument> javaSortedPager = new JavaSortedPager<>(javaSortedTestArray, pageSize);
+            javaSortedPager.setShouldCache(false);
+            javaSortedPager.page(0);
+            long stopJavaSorted = System.nanoTime();
+            ScoredResultsPager<ScoredDocument> scoredResultsPager =
+                    new ScoredResultsPager<>(
+                            selfSortedTestArray,
+                            pageSize,
+                            ScoredResultsPager.SortType.FUCKIN_FAST_FLASH_SORT,
+                            false, true, false);
+            scoredResultsPager.page(0);
+            long stopSelfSorted = System.nanoTime();
+
+            long javaSortedTime = stopJavaSorted - startJavaSorted;
+            long selfSortedTime = stopSelfSorted - stopJavaSorted;
+            System.out.println(testSize + ", " + javaSortedTime + ", " + selfSortedTime);
+            //System.out.println("Java ran in " + javaSortedTime + ", your sort ran in " + selfSortedTime +
+            //        " meaning your sort was faster for " + testSize + " objects by " + ((javaSortedTime - selfSortedTime) / 1000000.0) + " milliseconds. Good work!");
+
+            testSize *= 2;
+        }
 
 
     }
